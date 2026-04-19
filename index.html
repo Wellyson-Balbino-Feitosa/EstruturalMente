@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>EstruturalMente | Trabalho sobre Estruturalismo</title>
+    <link rel="icon" type="image/png" href="/cerebro.png" />
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary": "#5b5f63",
+                        "inverse-primary": "#aacae9",
+                        "inverse-surface": "#2e3132",
+                        "surface-variant": "#e1e3e4",
+                        "tertiary-fixed-dim": "#c1c7cd",
+                        "on-primary-container": "#d0e7ff",
+                        "on-background": "#191c1d",
+                        "secondary-fixed-dim": "#c3c7cc",
+                        "on-surface-variant": "#42474d",
+                        "on-secondary-fixed-variant": "#43474c",
+                        "tertiary-fixed": "#dde3e9",
+                        "on-secondary-container": "#5f6368",
+                        "on-tertiary-fixed-variant": "#41484d",
+                        "surface-container-high": "#e7e8e9",
+                        "primary": "#31516b",
+                        "on-tertiary-container": "#e0e5ec",
+                        "background": "#f8f9fa",
+                        "surface-dim": "#d9dadb",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#2a4a63",
+                        "outline": "#73777e",
+                        "tertiary": "#494f54",
+                        "inverse-on-surface": "#f0f1f2",
+                        "secondary-container": "#dde0e5",
+                        "primary-container": "#4a6984",
+                        "on-primary-fixed": "#001d31",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e1e3e4",
+                        "outline-variant": "#c2c7cd",
+                        "surface": "#f8f9fa",
+                        "secondary-fixed": "#e0e3e8",
+                        "surface-container": "#edeeef",
+                        "on-secondary-fixed": "#181c20",
+                        "surface-tint": "#42617c",
+                        "on-surface": "#191c1d",
+                        "primary-fixed": "#cce5ff",
+                        "surface-bright": "#f8f9fa",
+                        "primary-fixed-dim": "#aacae9",
+                        "on-tertiary-fixed": "#161c21",
+                        "surface-container-low": "#f3f4f5",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#61676c",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    fontFamily: {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Space Grotesk", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-feature-settings: "cv02", "cv03", "cv04", "cv11"; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>
