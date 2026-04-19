@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -12,23 +13,25 @@ const containerVariants = {
   }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    transition: { type: 'spring', stiffness: 100 }
+    transition: { type: 'spring' as const, stiffness: 100 }
   }
 };
 
 function App() {
   const [copyFeedback, setCopyFeedback] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    setIsMobileMenuOpen(false);
   };
 
   const handleShare = (platform: string) => {
@@ -109,16 +112,54 @@ function App() {
               </motion.li>
             ))}
           </ul>
-          <motion.button 
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="hidden md:block bg-primary text-on-primary font-label uppercase tracking-widest text-xs px-6 py-3 rounded-full hover:shadow-lg hover:shadow-primary/20 transition-all font-bold"
-          >
-            Acesso Analítico
-          </motion.button>
+          <div className="flex items-center gap-4">
+            <motion.button 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="hidden md:block bg-primary text-on-primary font-label uppercase tracking-widest text-xs px-6 py-3 rounded-full hover:shadow-lg hover:shadow-primary/20 transition-all font-bold"
+            >
+              Acesso Analítico
+            </motion.button>
+            <button 
+              className="md:hidden text-primary p-2"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              <span className="material-symbols-outlined text-3xl">
+                {isMobileMenuOpen ? 'close' : 'menu'}
+              </span>
+            </button>
+          </div>
         </div>
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div 
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="md:hidden bg-white border-b border-outline-variant/10 overflow-hidden"
+            >
+              <ul className="flex flex-col p-6 gap-6 font-headline text-2xl">
+                {[
+                  { name: 'Módulos', id: 'modulos' },
+                  { name: 'Arquivo', id: 'arquivo' },
+                  { name: 'Laboratório', id: 'laboratorio' },
+                  { name: 'Sobre', id: 'sobre' }
+                ].map((link) => (
+                  <li key={link.id}>
+                    <button 
+                      onClick={() => scrollToSection(link.id)}
+                      className="text-on-surface w-full text-left active:text-primary"
+                    >
+                      {link.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       <main className="max-w-[1920px] mx-auto">
