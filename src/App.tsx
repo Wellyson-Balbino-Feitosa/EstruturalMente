@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
+import { Analytics } from "@vercel/analytics/react";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -561,6 +562,7 @@ function App() {
            </div>
         </div>
       </footer>
+      <Analytics />
     </div>
   );
 }
