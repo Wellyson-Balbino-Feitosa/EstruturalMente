@@ -55,42 +55,21 @@ function App() {
     }
   };
 
-  const timelinePoints = [
-    { year: '1860', label: 'G. Fechner', desc: 'Psicofísica', secondary: true },
-    { 
-      year: '1879', 
-      label: 'Wilhelm Wundt', 
-      desc: '1º Lab Experimental em Leipzig', 
-      highlight: true,
-      image: '/Wilhelm-Wundt.jpg'
-    },
-    { year: '1890', label: 'W. James', desc: 'Funcionalismo', secondary: true },
-    { 
-      year: '1892', 
-      label: 'Edward Titchener', 
-      desc: 'Estruturalismo nos EUA', 
-      highlight: true,
-      image: '/Edward_Bradford_Titchener.jpg'
-    },
-    { year: '1900', label: 'S. Freud', desc: 'Psicanálise', secondary: true },
-    { year: '1913', label: 'J. Watson', desc: 'Behaviorismo', secondary: true },
-    { year: '1950', label: 'Rev. Cognitiva', desc: 'Novos rumos', secondary: true },
-  ];
 
   return (
-    <div className="min-h-screen selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden bg-[#fafafa]">
+    <div className="min-h-screen selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden bg-background">
       {/* TopNavBar */}
-      <nav className="bg-white/80 dark:bg-black/80 backdrop-blur-md fixed top-0 w-full z-50 border-b border-outline-variant/20">
+      <nav className="bg-[#021124] fixed top-0 w-full z-50 shadow-md">
         <div className="flex justify-between items-center w-full px-6 md:px-12 py-4 max-w-[1920px] mx-auto">
           <motion.div 
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            className="font-mono text-xl font-bold tracking-widest text-primary dark:text-white font-label cursor-pointer"
+            className="font-headline text-2xl tracking-widest text-white cursor-pointer"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             ESTRUTURAL<span className="text-secondary font-light">MENTE</span>
           </motion.div>
-          <ul className="hidden md:flex items-center gap-8 font-headline text-lg tracking-tight">
+          <ul className="hidden md:flex items-center gap-8 font-headline text-lg tracking-tight text-white/80">
             {[
               { name: 'Módulos', id: 'modulos' },
               { name: 'Arquivo', id: 'arquivo' },
@@ -105,10 +84,10 @@ function App() {
               >
                 <button 
                   onClick={() => scrollToSection(link.id)}
-                  className="text-on-surface hover:text-primary transition-colors relative group"
+                  className="hover:text-white transition-colors relative group"
                 >
                   {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all group-hover:w-full"></span>
                 </button>
               </motion.li>
             ))}
@@ -119,12 +98,12 @@ function App() {
               animate={{ scale: 1, opacity: 1 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="hidden md:block bg-primary text-on-primary font-label uppercase tracking-widest text-xs px-6 py-3 rounded-full hover:shadow-lg hover:shadow-primary/20 transition-all font-bold"
+              className="hidden md:block bg-background text-[#021124] font-label uppercase tracking-widest text-xs px-6 py-3 rounded-full hover:shadow-lg transition-all font-bold"
             >
               Acesso Analítico
             </motion.button>
             <button 
-              className="md:hidden text-primary p-2"
+              className="md:hidden text-white p-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <span className="material-symbols-outlined text-3xl">
@@ -139,9 +118,9 @@ function App() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden bg-white border-b border-outline-variant/10 overflow-hidden"
+              className="md:hidden bg-[#021124] border-t border-white/10 overflow-hidden"
             >
-              <ul className="flex flex-col p-6 gap-6 font-headline text-2xl">
+              <ul className="flex flex-col p-6 gap-6 font-headline text-2xl text-white">
                 {[
                   { name: 'Módulos', id: 'modulos' },
                   { name: 'Arquivo', id: 'arquivo' },
@@ -151,7 +130,7 @@ function App() {
                   <li key={link.id}>
                     <button 
                       onClick={() => scrollToSection(link.id)}
-                      className="text-on-surface w-full text-left active:text-primary"
+                      className="w-full text-left active:text-secondary"
                     >
                       {link.name}
                     </button>
@@ -165,128 +144,87 @@ function App() {
 
       <main className="max-w-[1920px] mx-auto">
         {/* 1. HERO SECTION */}
-        <section id="home" className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 pt-12 pb-20 overflow-hidden">
-          <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] animate-pulse"></div>
-          <div className="absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[100px] animate-pulse delay-700"></div>
-          
+        {/* 1. HERO SECTION */}
+        <section id="home" className="relative min-h-screen flex flex-col items-center justify-center px-6 md:px-12 pt-32 pb-20 overflow-hidden bg-background">
           <motion.div 
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="z-10 w-full"
+            className="z-10 w-full flex flex-col items-center mt-12 md:mt-0"
           >
-            <div className="text-center mb-16">
-              <motion.p variants={itemVariants} className="font-label text-primary uppercase tracking-[0.5em] text-sm mt-12 inline-block">
-                Módulo Introdutório — Estruturalismo
-              </motion.p>
-              <motion.h1 
-                variants={itemVariants}
-                className="font-headline text-7xl md:text-9xl lg:text-[10rem] text-primary leading-[0.85] tracking-tighter mb-4 drop-shadow-sm"
-              >
-                Decompor.<br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-container to-secondary mr-6">Compreender.</span>
-              </motion.h1>
-              
-              <motion.div variants={itemVariants} className="mt-8 max-w-2xl mx-auto">
-                <p className="font-body text-xl text-on-surface-variant leading-relaxed p-6 border-l-4 border-primary bg-white/50 backdrop-blur-xl rounded-r-2xl shadow-xl shadow-primary/5">
-                  A mente não é um mistério indivisível. É uma estrutura de sensações, imagens e sentimentos que podem ser isolados e estudados.
-                </p>
-              </motion.div>
-            </div>
-            
-            {/* TIMELINE SECTION WITH IMAGES ABOVE POINTS */}
-            <div className="w-full px-4 md:px-20 mt-12 overflow-x-auto pb-10 scrollbar-hide">
-              <div className="min-w-[1200px] relative pt-48 pb-10">
-                <div className="absolute top-[236px] left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent"></div>
-                <div className="flex justify-between items-start px-20 relative">
-                  {timelinePoints.map((point, i) => (
-                    <motion.div 
-                      key={i} 
-                      className={`relative flex flex-col items-center group ${point.highlight ? 'cursor-pointer' : ''}`}
-                      onClick={() => point.highlight && scrollToSection('arquivo')}
-                      whileHover={point.highlight ? { y: -5 } : {}}
-                    >
-                      {/* Floating Image Above Point */}
-                      {point.image && (
-                        <motion.div 
-                          className="absolute -top-40 w-28 h-36 p-1 bg-white shadow-2xl border border-outline-variant/30 overflow-hidden"
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.5 + i * 0.1 }}
-                        >
-                          <img src={point.image} className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 transition-all duration-500" alt={point.label} />
-                        </motion.div>
-                      )}
+            <motion.p variants={itemVariants} className="font-headline text-secondary uppercase tracking-[0.2em] text-sm md:text-xl mb-16 font-semibold">
+              Módulo Introdutório — Estruturalismo
+            </motion.p>
 
-                      <div className={`w-4 h-4 rounded-full mb-4 z-10 transition-all duration-500 shadow-sm border-2 ${
-                        point.highlight 
-                        ? 'bg-primary border-white ring-4 ring-primary/20 scale-125' 
-                        : 'bg-white border-outline-variant scale-100'
-                      }`}></div>
-                      
-                      <span className={`text-[12px] font-bold font-label mb-1 transition-colors ${point.highlight ? 'text-primary' : 'text-secondary/50 group-hover:text-secondary'}`}>
-                        {point.year}
-                      </span>
-                      
-                      <div className={`text-center max-w-[150px] transition-all ${point.highlight ? 'opacity-100' : 'opacity-40 group-hover:opacity-100'}`}>
-                        <p className={`text-[10px] font-black uppercase tracking-tighter leading-tight ${point.highlight ? 'text-primary' : 'text-on-surface'}`}>
-                          {point.label}
-                        </p>
-                        <p className="text-[9px] font-body text-on-surface-variant leading-tight mt-1 px-2">
-                          {point.desc}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
+            <motion.div variants={itemVariants} className="flex flex-col items-center scale-75 md:scale-100">
+              <div className="flex items-center shadow-xl rounded-full overflow-hidden mb-4">
+                <div className="bg-primary text-white px-10 md:px-16 py-6 md:py-8 font-headline text-6xl md:text-8xl lg:text-[7rem] rounded-full z-10 leading-none pb-12">
+                  De
+                </div>
+                <div className="bg-white text-primary px-10 md:px-16 py-6 md:py-8 font-headline text-6xl md:text-8xl lg:text-[7rem] rounded-r-full -ml-16 pl-14 z-0 leading-none pb-12">
+                  compor.
                 </div>
               </div>
-            </div>
+              
+              <div className="flex flex-col items-center mt-2">
+                <h1 className="font-headline text-6xl md:text-8xl lg:text-[7rem] text-primary leading-none">
+                  Compreender.
+                </h1>
+                <div className="w-[105%] h-[4px] md:h-2 bg-primary mt-6"></div>
+              </div>
+            </motion.div>
 
-            <div className="mt-12 flex justify-center">
-                <div className="flex flex-wrap justify-center gap-3 max-w-4xl">
-                  {['Introspecção', 'Estrutura', 'Consciência', 'Sensaçăo', 'Imagem'].map(tag => (
-                    <div key={tag} className="bg-white/80 px-4 py-2 rounded-lg text-[15px] font-label uppercase tracking-widest text-primary text-center border border-primary/10 shadow-sm hover:shadow-md transition-shadow cursor-default">
-                      {tag}
-                    </div>
-                  ))}
-                </div>
-            </div>
+            <motion.div variants={itemVariants} className="mt-24 max-w-2xl flex relative z-10 w-full">
+              <div className="bg-primary w-12 rounded-l-3xl shadow-lg shrink-0"></div>
+              <div className="bg-white rounded-r-3xl rounded-l-2xl -ml-6 py-8 px-10 shadow-xl flex items-center gap-6 z-10 w-full">
+                <div className="w-2 h-2 rounded-full bg-primary shrink-0"></div>
+                <p className="font-headline text-base md:text-lg text-primary text-left leading-relaxed font-medium">
+                  A mente não é um mistério indivisível. É uma estrutura de sensações, imagens e sentimentos que podem ser isolados e estudados.
+                </p>
+              </div>
+            </motion.div>
           </motion.div>
 
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {[
-              { text: "Sensação", top: "20%", left: "10%" },
-              { text: "Imagem", top: "70%", left: "85%" },
-              { text: "Sentimento", top: "15%", left: "80%" },
-              { text: "Estrutura", top: "85%", left: "15%" },
-              { text: "Introspecção", top: "35%", left: "50%" }
-            ].map((node, i) => (
-              <motion.div 
-                key={i}
-                animate={{ y: [0, 15, 0], x: [0, 10, 0] }}
-                transition={{ duration: 5 + i, repeat: Infinity }}
-                className="absolute font-label text-[15px] uppercase tracking-[0.4em] text-black/60 font-bold opacity-30"
-                style={{ top: node.top, left: node.left }}
-              >
-                {node.text}
-              </motion.div>
-            ))}
+          <div className="mt-20 w-full flex justify-center z-10 relative">
+              <div className="flex flex-wrap justify-center gap-4 md:gap-6 max-w-5xl">
+                {['Introspecção', 'Estrutura', 'Consciência', 'Sensação', 'Imagem', 'Estruturalismo', 'Psicologia'].map(tag => (
+                  <motion.div 
+                    whileHover={{ scale: 1.05 }}
+                    key={tag} 
+                    className="bg-[#021124] text-white px-8 md:px-12 py-3 md:py-4 rounded-full text-xs md:text-sm font-label uppercase tracking-widest text-center shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] cursor-default transition-all"
+                  >
+                    {tag}
+                  </motion.div>
+                ))}
+              </div>
+          </div>
+
+          <div className="absolute inset-0 pointer-events-none overflow-hidden font-headline text-xl md:text-3xl text-secondary uppercase tracking-[0.1em] opacity-60">
+            <motion.div animate={{ y: [0, -15, 0] }} transition={{ duration: 6, repeat: Infinity }} className="absolute top-[25%] left-[5%] md:left-[15%]">Sensação</motion.div>
+            <motion.div animate={{ y: [0, 15, 0] }} transition={{ duration: 5.5, repeat: Infinity }} className="absolute top-[30%] right-[5%] md:right-[15%]">Sentimento</motion.div>
+            <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 7, repeat: Infinity }} className="absolute bottom-[25%] left-[10%] md:left-[20%]">Consciência</motion.div>
+            <motion.div animate={{ y: [0, 12, 0] }} transition={{ duration: 6.5, repeat: Infinity }} className="absolute bottom-[20%] right-[5%] md:right-[18%]">Introspecção</motion.div>
+            <motion.div animate={{ y: [0, 12, 0] }} transition={{ duration: 6.5, repeat: Infinity }} className="absolute bottom-[20%] left-[30%] md:left-[15%]">Sistema</motion.div>
+            <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 6.5, repeat: Infinity }} className="absolute top-[55%] right-[10%] md:right-[18%]">Estruturalismo</motion.div>
+            <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 6.5, repeat: Infinity }} className="absolute bottom-[10%] right-[50%] md:right-[18%]">Psicologia</motion.div>
+            <motion.div animate={{ y: [0, -15, 0] }} transition={{ duration: 6.5, repeat: Infinity }} className="absolute top-[35%] left-[10%] md:left-[8%]">Elementarismo</motion.div>
           </div>
         </section>
 
         {/* 2. HISTORICAL TIMELINE - Detailed Archive (Arquivos de Leipzig) */}
-        <section id="arquivo" className="bg-surface-container-low px-6 md:px-12 py-32 relative">
+        {/* 2. HISTORICAL TIMELINE - Detailed Archive (Arquivos de Leipzig) */}
+        <section id="arquivo" className="bg-background px-6 md:px-12 py-32 relative">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-20 text-center"
+            className="mb-32 text-center"
           >
-             <h2 className="font-headline text-5xl text-primary mb-4 tracking-tight">Arquivos de Leipzig</h2>
+             <h2 className="font-headline text-5xl text-primary mb-4 tracking-tight">Os Arquivos de Leipzig</h2>
              <p className="font-label text-secondary uppercase tracking-widest text-sm">A Origem e a Expansão do Estruturalismo</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 relative px-6 md:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 relative px-6 md:px-16 max-w-[1400px] mx-auto">
             {/* Legend 1: Wundt */}
             <motion.div 
               initial={{ opacity: 0, y: 50 }}
@@ -294,9 +232,9 @@ function App() {
               viewport={{ once: true }}
               className="flex flex-col items-center group"
             >
-              <div className="relative mb-12 w-full max-w-[340px] aspect-[4/5] z-10">
-                <div className="absolute inset-[-40px] md:inset-[-60px] z-20 pointer-events-none overflow-hidden scale-110">
-                    <img src="/foto de moldura.jpg" className="w-full h-full object-contain mix-blend-multiply opacity-90" alt="frame" />
+              <div className="relative mb-12 w-full max-w-[340px] aspect-[4/5] z-10 drop-shadow-[0_20px_40px_rgba(4,30,58,0.3)]">
+                <div className="absolute inset-[-40px] md:inset-[-60px] z-20 pointer-events-none overflow-hidden scale-[1.15]">
+                    <img src="/moldura-nova.png" className="w-full h-full object-contain" alt="frame" />
                 </div>
                 <div className="relative w-full h-full p-2 bg-white shadow-inner overflow-hidden">
                     <img 
@@ -306,15 +244,21 @@ function App() {
                     />
                 </div>
               </div>
-              <div className="bg-white p-12 rounded-[2rem] shadow-xl border border-outline-variant/10 w-full relative -mt-6 pt-16">
-                <h3 className="font-label text-3xl uppercase tracking-tighter mb-4 text-primary font-bold text-center">Wilhelm Wundt</h3>
-                <div className="w-12 h-1 bg-primary mb-8 mx-auto"></div>
-                <p className="font-body text-lg text-on-surface-variant leading-relaxed mb-6">
-                  Conhecido como o "Pai da Psicologia Experimental", Wundt fundou o primeiro laboratório em Leipzig (1879). Defendia que a psicologia deveria investigar a consciência imediata por meio de métodos experimentais rigorosos, incluindo a introspecção controlada.
-                </p>
-                <p className="font-body text-sm text-secondary italic border-l-4 border-secondary/30 pl-4 bg-secondary/5 p-4 rounded-r-lg">
-                  Segundo Wundt, o método experimental de laboratório é fundamental para garantir a precisão das observações psicológicas.
-                </p>
+              
+              <div className="bg-surface p-10 rounded-[3rem] shadow-2xl border-t-8 border-primary w-full relative -mt-10 pt-12 z-20 hover:-translate-y-2 transition-transform duration-500">
+                <div className="flex gap-4 items-start mb-8">
+                   <div className="w-2 h-2 mt-2.5 rounded-full bg-primary shrink-0"></div>
+                   <p className="font-headline text-lg text-[#033574] text-justify leading-relaxed">
+                     <span className="font-bold font-label uppercase tracking-widest text-sm block mb-2 text-[#033574]">Wilhelm Wundt</span>
+                     Conhecido como o "Pai da Psicologia Experimental", fundou o primeiro laboratório em Leipzig (1879). Defendia que a psicologia deveria investigar a consciência imediata por meio de métodos experimentais rigorosos, incluindo a introspecção controlada.
+                   </p>
+                </div>
+                <div className="bg-[#e2e2e2] rounded-full py-4 px-6 flex items-center gap-4">
+                  <div className="w-4 h-4 rounded-full bg-secondary shrink-0 opacity-80"></div>
+                  <p className="font-body text-xs text-primary italic leading-relaxed">
+                    Para Wilhelm Wundt, o método experimental de laboratório constitui um instrumento central para o estudo científico da experiência imediata, ao possibilitar controle, repetição e maior precisão na observação dos fenômenos psíquicos.
+                  </p>
+                </div>
               </div>
             </motion.div>
 
@@ -325,9 +269,9 @@ function App() {
               viewport={{ once: true }}
               className="flex flex-col items-center lg:mt-32 group"
             >
-              <div className="relative mb-12 w-full max-w-[340px] aspect-[4/5] z-10">
-                <div className="absolute inset-[-40px] md:inset-[-60px] z-20 pointer-events-none overflow-hidden scale-110">
-                    <img src="/foto de moldura.jpg" className="w-full h-full object-contain mix-blend-multiply opacity-90" alt="frame" />
+              <div className="relative mb-12 w-full max-w-[340px] aspect-[4/5] z-10 drop-shadow-[0_20px_40px_rgba(4,30,58,0.3)]">
+                <div className="absolute inset-[-40px] md:inset-[-60px] z-20 pointer-events-none overflow-hidden scale-[1.15]">
+                    <img src="/moldura-nova.png" className="w-full h-full object-contain" alt="frame" />
                 </div>
                 <div className="relative w-full h-full p-2 bg-white shadow-inner overflow-hidden">
                     <img 
@@ -337,15 +281,21 @@ function App() {
                     />
                 </div>
               </div>
-              <div className="bg-white p-12 rounded-[2rem] shadow-xl border border-outline-variant/10 w-full relative -mt-6 pt-16">
-                <h3 className="font-label text-3xl uppercase tracking-tighter mb-4 text-secondary font-bold text-center">Edward Titchener</h3>
-                <div className="w-12 h-1 bg-secondary mb-8 mx-auto"></div>
-                <p className="font-body text-lg text-on-surface-variant leading-relaxed mb-6">
-                  Discípulo de Wilhelm Wundt, Edward Bradford Titchener foi o principal responsável por divulgar e sistematizar o Estruturalismo nos Estados Unidos. Desenvolveu uma forma rigorosa de introspecção experimental, buscando decompor a consciência em seus elementos fundamentais.
-                </p>
-                <p className="font-body text-sm text-secondary italic border-l-4 border-secondary/30 pl-4 bg-secondary/5 p-4 rounded-r-lg">
-                  Sintentizando seu pensamento: "A psicologia é a ciência da mente, e a mente é a soma total da experiência humana considerada como dependente da pessoa que a vivencia."
-                </p>
+              
+              <div className="bg-surface p-10 rounded-[3rem] shadow-2xl border-t-8 border-primary w-full relative -mt-10 pt-12 z-20 hover:-translate-y-2 transition-transform duration-500">
+                <div className="flex gap-4 items-start mb-8">
+                   <div className="w-2 h-2 mt-2.5 rounded-full bg-primary shrink-0"></div>
+                   <p className="font-headline text-lg text-[#033574] text-justify leading-relaxed">
+                     <span className="font-bold font-label uppercase tracking-widest text-sm block mb-2 text-[#033574]">Edward Titchener</span>
+                     Discípulo de Wundt, principal responsável por divulgar e sistematizar o Estruturalismo nos EUA. Desenvolveu uma forma rigorosa de introspecção experimental para decompor a consciência em elementos fundamentais.
+                   </p>
+                </div>
+                <div className="bg-[#e2e2e2] rounded-full py-4 px-6 flex items-center gap-4">
+                  <div className="w-4 h-4 rounded-full bg-secondary shrink-0 opacity-80"></div>
+                  <p className="font-body text-xs text-primary italic leading-relaxed">
+                    Em síntese, para Edward Bradford Titchener, a psicologia consiste na análise da experiência consciente, concebida como a soma dos conteúdos mentais que podem ser decompostos em elementos básicos.
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -408,7 +358,7 @@ function App() {
                     </motion.div>
                   ))}
                   <motion.button 
-                    whileHover={{ scale: 1.02, backgroundColor: '#fff', color: '#31516b' }}
+                    whileHover={{ scale: 1.02, backgroundColor: '#fff', color: '#041E3A' }}
                     whileTap={{ scale: 0.98 }}
                     className="w-full bg-white text-primary font-label uppercase tracking-[0.2em] text-sm font-black px-12 py-6 rounded-2xl transition-all shadow-lg"
                     type="button"
@@ -422,7 +372,7 @@ function App() {
         </section>
 
         {/* 4. DECOMPOSITION GRID */}
-        <section id="modulos" className="bg-white px-6 md:px-12 py-32">
+        <section id="modulos" className="bg-background px-6 md:px-12 py-32">
           <div className="max-w-4xl mx-auto text-center mb-24">
             <motion.h2 
               initial={{ opacity: 0 }}
