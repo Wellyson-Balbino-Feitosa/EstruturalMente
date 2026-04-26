@@ -27,6 +27,51 @@ function App() {
   const [copyFeedback, setCopyFeedback] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const [sensations, setSensations] = useState('');
+  const [mentalImages, setMentalImages] = useState('');
+  const [feelings, setFeelings] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitFeedback, setSubmitFeedback] = useState<{ type: 'success' | 'error', message: string } | null>(null);
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!sensations.trim() || !mentalImages.trim() || !feelings.trim()) {
+      setSubmitFeedback({ type: 'error', message: 'Por favor, preencha todos os campos antes de enviar.' });
+      return;
+    }
+
+    setIsLoading(true);
+    setSubmitFeedback(null);
+
+    try {
+      const response = await fetch('https://backend-estruturalmente.vercel.app/api/responses', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sensations,
+          mental_images: mentalImages,
+          feelings,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Falha ao enviar resposta');
+      }
+
+      setSubmitFeedback({ type: 'success', message: 'Respostas enviadas com sucesso!' });
+      setSensations('');
+      setMentalImages('');
+      setFeelings('');
+    } catch (error) {
+      console.error('Erro ao enviar formulário:', error);
+      setSubmitFeedback({ type: 'error', message: 'Ocorreu um erro ao enviar. Tente novamente mais tarde.' });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -336,11 +381,23 @@ function App() {
               </motion.div>
 
               <div className="lg:col-span-7">
-                <form className="space-y-8">
+                <form className="space-y-8" onSubmit={handleFormSubmit}>
+                  <AnimatePresence>
+                    {submitFeedback && (
+                      <motion.div 
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className={`p-4 rounded-xl font-body text-sm font-medium ${submitFeedback.type === 'success' ? 'bg-green-500/20 text-green-200 border border-green-500/30' : 'bg-red-500/20 text-red-200 border border-red-500/30'}`}
+                      >
+                        {submitFeedback.message}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                   {[
-                    { label: 'Sensações Elementares', placeholder: 'Cores, texturas, temperaturas...' },
-                    { label: 'Imagens Mentais', placeholder: 'Memórias visuais evocadas...' },
-                    { label: 'Afetos (Sentimentos)', placeholder: 'Dimensões de prazer ou tensão...' }
+                    { label: 'Sensações Elementares', placeholder: 'Cores, texturas, temperaturas...', value: sensations, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setSensations(e.target.value) },
+                    { label: 'Imagens Mentais', placeholder: 'Memórias visuais evocadas...', value: mentalImages, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setMentalImages(e.target.value) },
+                    { label: 'Afetos (Sentimentos)', placeholder: 'Dimensões de prazer ou tensão...', value: feelings, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setFeelings(e.target.value) }
                   ].map((field, idx) => (
                     <motion.div 
                       key={field.label}
@@ -354,16 +411,20 @@ function App() {
                         className="w-full bg-white/5 border-2 border-white/10 rounded-2xl focus:border-white focus:bg-white/10 focus:ring-0 px-8 py-5 font-body text-white transition-all placeholder:text-white/20 outline-none" 
                         placeholder={field.placeholder} 
                         type="text"
+                        value={field.value}
+                        onChange={field.onChange}
+                        disabled={isLoading}
                       />
                     </motion.div>
                   ))}
                   <motion.button 
-                    whileHover={{ scale: 1.02, backgroundColor: '#fff', color: '#041E3A' }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full bg-white text-primary font-label uppercase tracking-[0.2em] text-sm font-black px-12 py-6 rounded-2xl transition-all shadow-lg"
-                    type="button"
+                    whileHover={!isLoading ? { scale: 1.02, backgroundColor: '#fff', color: '#041E3A' } : {}}
+                    whileTap={!isLoading ? { scale: 0.98 } : {}}
+                    className={`w-full font-label uppercase tracking-[0.2em] text-sm font-black px-12 py-6 rounded-2xl transition-all shadow-lg ${isLoading ? 'bg-white/50 text-primary/50 cursor-not-allowed' : 'bg-white text-primary'}`}
+                    type="submit"
+                    disabled={isLoading}
                   >
-                    Registrar Análise Estrutural
+                    {isLoading ? 'Enviando...' : 'Registrar Análise Estrutural'}
                   </motion.button>
                 </form>
               </div>
