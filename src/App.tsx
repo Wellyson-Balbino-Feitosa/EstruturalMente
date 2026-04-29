@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { Analytics } from "@vercel/analytics/react";
+import { IntrospectiveAudioForm } from './components/IntrospectiveAudioForm';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -44,7 +45,7 @@ function App() {
     setSubmitFeedback(null);
 
     try {
-      const response = await fetch('https://backend-estruturalmente.vercel.app/api/responses', {
+      const response = await fetch('https://backend-estruturalmente.vercel.app/api/stimulus-1/responses', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +61,7 @@ function App() {
         throw new Error('Falha ao enviar resposta');
       }
 
-      setSubmitFeedback({ type: 'success', message: 'Respostas enviadas com sucesso!' });
+      setSubmitFeedback({ type: 'success', message: 'Análise Introspectiva registrada com sucesso!' });
       setSensations('');
       setMentalImages('');
       setFeelings('');
@@ -428,6 +429,21 @@ function App() {
                   </motion.button>
                 </form>
               </div>
+            </div>
+
+            {/* Estímulo #02: Auditivo */}
+            <div className="mt-24 pt-20 border-t border-white/20">
+               <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-8">
+                  <div className="text-center md:text-left">
+                    <h3 className="font-headline text-5xl tracking-tighter mb-4 text-white">Estímulo Físico #02</h3>
+                    <div className="inline-block px-4 py-1 bg-white/20 rounded-full font-label text-xs uppercase tracking-widest backdrop-blur-sm">Simulação V.1.1 | Domínio Auditivo</div>
+                  </div>
+                  <p className="md:max-w-md font-body text-lg text-white/80 border-l-2 border-white/30 pl-8">
+                    Análise focada em texturas sonoras e variações de intensidade.
+                  </p>
+               </div>
+               
+               <IntrospectiveAudioForm audioSrc="/estimulo-audio.mp3" />
             </div>
           </div>
         </section>
