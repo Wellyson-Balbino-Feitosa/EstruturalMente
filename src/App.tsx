@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { Analytics } from "@vercel/analytics/react";
 import { IntrospectiveAudioForm } from './components/IntrospectiveAudioForm';
+import { HeroTimeline } from './components/HeroTimeline';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -245,6 +246,10 @@ function App() {
               </div>
           </div>
 
+          <motion.div variants={itemVariants} className="mt-12 w-full flex justify-center z-10">
+            <HeroTimeline />
+          </motion.div>
+
           <div className="absolute inset-0 pointer-events-none overflow-hidden font-headline text-xl md:text-3xl text-secondary uppercase tracking-[0.1em] opacity-60">
             <motion.div animate={{ y: [0, -15, 0] }} transition={{ duration: 6, repeat: Infinity }} className="absolute top-[25%] left-[5%] md:left-[15%]">Sensação</motion.div>
             <motion.div animate={{ y: [0, 15, 0] }} transition={{ duration: 5.5, repeat: Infinity }} className="absolute top-[30%] right-[5%] md:right-[15%]">Sentimento</motion.div>
@@ -257,7 +262,6 @@ function App() {
           </div>
         </section>
 
-        {/* 2. HISTORICAL TIMELINE - Detailed Archive (Arquivos de Leipzig) */}
         {/* 2. HISTORICAL TIMELINE - Detailed Archive (Arquivos de Leipzig) */}
         <section id="arquivo" className="bg-background px-6 md:px-12 py-32 relative">
           <motion.div 
@@ -346,6 +350,7 @@ function App() {
             </motion.div>
           </div>
         </section>
+
 
         {/* 3. INTROSPECTION LAB */}
         <section id="laboratorio" className="bg-primary text-white px-6 md:px-12 py-32 rounded-[3.5rem] mx-6 my-20 shadow-2xl shadow-primary/30 relative overflow-hidden">
